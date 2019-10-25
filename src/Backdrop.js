@@ -255,54 +255,58 @@ class Backdrop extends Component {
       : 0;
 
     return (
-      <SafeAreaView pointerEvents="box-none" style={styles.wrapper}>
-        <Animated.View
-          style={[
-            styles.overlayStyle,
-            {
-              backgroundColor: overlayColor,
-              opacity: opacityAnimation
-            }
-          ]}
-          pointerEvents={visible ? "auto" : "none"}
-        >
-          <TouchableOpacity
-            style={styles.overlayTouchable}
-            onPress={this._handleClose}
-          />
-        </Animated.View>
+            <SafeAreaView pointerEvents="box-none" style={styles.wrapper}>
+                <Animated.View
+                    style={[
+                        styles.overlayStyle,
+                        {
+                            backgroundColor: overlayColor,
+                            opacity: opacityAnimation,
+                        },
+                    ]}
+                    pointerEvents={visible ? 'auto' : 'none'}
+                >
+                    <TouchableOpacity
+                        style={styles.overlayTouchable}
+                        onPress={this._handleClose}
+                    />
+                </Animated.View>
 
-        <Animated.View
-          pointerEvents="box-none"
-          accessibilityLiveRegion="polite"
-          style={[
-            styles.contentContainer,
-            {
-              opacity: backdropHeight && visible ? 1 : 0, // Hide before layout prevents blink
-              transform: [
-                {
-                  translateY: this._transitionY
-                }
-              ]
-            }
-          ]}
-        >
-          <View
-            pointerEvents={backdropHeight && visible ? 'auto' : 'none'}
-            style={[
-              styles.container,
-              { paddingBottom: this.props.paddingBottom + 12 },
-              backdropStyle
-            ]}
-            onLayout={this.onLayout}
-            {...this._panResponder.panHandlers}
-          >
-            {!!header && header()}
-            <View>{children}</View>
-          </View>
-        </Animated.View>
-      </SafeAreaView>
-    );
+                <Animated.View
+                    pointerEvents="box-none"
+                    accessibilityLiveRegion="polite"
+                    style={[
+                        styles.contentContainer,
+                        {
+                            opacity: backdropHeight && visible ? 1 : 0, // Hide before layout prevents blink
+                            transform: [
+                                {
+                                    translateY: this._transitionY,
+                                },
+                            ],
+                        },
+                    ]}
+                >
+                    <View
+                        pointerEvents={backdropHeight && visible ? 'auto' : 'none'}
+                        style={[
+                            styles.container,
+                            {paddingBottom: this.props.paddingBottom + 12},
+                            backdropStyle,
+                        ]}
+                        onLayout={this.onLayout}
+                    >
+                        <View
+
+                            {...this._panResponder.panHandlers}
+                        >
+                            {!!header && header()}
+                        </View>
+                        <View>{children}</View>
+                    </View>
+                </Animated.View>
+            </SafeAreaView>
+        );
   }
 }
 
